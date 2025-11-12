@@ -43,13 +43,15 @@ From the optional list, this project includes:
     Job output logging
 
     Scheduled / delayed jobs
-    
+
     Metrics / execution stats
 
 
 # config
 python -m queuectl.cli config set max_retries 3
+
 python -m queuectl.cli config set backoff_base 2
+
 python -m queuectl.cli config set job_timeout 10
 
 # Simple immediate job
@@ -66,6 +68,7 @@ python -m queuectl.cli enqueue --cmd "echo Scheduled" --id sched1 --run-at "2025
 
 # JSON-style
 $json = '{"command": "echo From JSON", "max_retries": 3}'
+
 python -m queuectl.cli enqueue $json
 
 # Start workers (Ctrl+C to stop)
@@ -79,8 +82,11 @@ python -m queuectl.cli status
 
 # List jobs by state
 python -m queuectl.cli list --state pending
+
 python -m queuectl.cli list --state completed
+
 python -m queuectl.cli list --state failed
+
 python -m queuectl.cli list --state dead
 
 # View job logs (example)
@@ -97,12 +103,17 @@ python -m queuectl.cli metrics
 
 
 # Testing : All tests are plain Python scripts (no extra test framework needed):
-# basic enqueue + run + complete flow
-python tests/test_basic.py           
-# retries, backoff, DLQ behavior
-python tests/test_retry_backoff.py   
-# jobs persist across "restart"
-python tests/test_persistence.py  
+basic enqueue + run + complete flow:
+
+    python tests/test_basic.py  
+
+retries, backoff, DLQ behavior:
+
+    python tests/test_retry_backoff.py  
+
+jobs persist across "restart":
+
+    python tests/test_persistence.py  
 
 Video Demo Link:
 [text](https://drive.google.com/drive/folders/1EkitaHKVa0kJA9h4p9FKgX0iO9XjT37R)
