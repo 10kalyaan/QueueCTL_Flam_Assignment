@@ -115,8 +115,7 @@ jobs persist across "restart":
 
     python tests/test_persistence.py  
 
-Video Demo Link:
-[text](https://drive.google.com/drive/folders/1EkitaHKVa0kJA9h4p9FKgX0iO9XjT37R)
+Video Demo Link: https://drive.google.com/drive/folders/1EkitaHKVa0kJA9h4p9FKgX0iO9XjT37R
 
 
 
