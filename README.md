@@ -25,22 +25,10 @@ Configurable:
 
 Bonus Features Implemented
 From the optional list, this project includes:
-Job timeout handling
-    Jobs are executed with subprocess.run(..., timeout=job_timeout). On timeout, the job is marked failed and the error is stored.
-Job output logging
-    Each job’s stdout/stderr is written to data/logs/job-<id>.log, and the path is stored on the job.
-Scheduled / delayed jobs
-    --delay <seconds>: run the job after a delay
-
-    --run-at <ISO timestamp>: run at a specific time
-    Jobs are only picked up when next_run_at <= now.
-Metrics / execution stats:
-metrics prints:
-    total jobs
-    counts by state
-    success rate
-    average attempts (completed/dead)
-    average duration of completed jobs
+    Job timeout handling
+    Job output logging
+    Scheduled / delayed jobs
+    Metrics / execution stats
 
 
 # config
