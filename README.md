@@ -1,33 +1,49 @@
 # queuectl
-
 queuectl is a simple CLI-based background job queue built in Python.
 It supports multiple workers, retries with exponential backoff, a Dead Letter Queue (DLQ), persistent storage, timeouts, logging, and basic metrics.
 
 # Features:
 CLI tool for managing background jobs:
+
     enqueue – add jobs
+
     worker start/stop – run worker processes
+
     status – job + worker summary
+
     list – list jobs by state
+
     dlq – view & retry dead jobs
+
     config – manage settings
+
     metrics – basic execution stats
 
 Job persistence using SQLite (data/jobs.db)
+
 Multiple workers using multiprocessing
+
 Automatic retries with exponential backoff
+
 Dead Letter Queue (DLQ) via state=dead
 
 Configurable:
+
     max_retries
+
     backoff_base
+
     job_timeout (seconds)
 
-Bonus Features Implemented
+# Bonus Features Implemented
 From the optional list, this project includes:
+
     Job timeout handling
+
     Job output logging
+
     Scheduled / delayed jobs
+    
     Metrics / execution stats
 
 
