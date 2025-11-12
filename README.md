@@ -47,8 +47,10 @@ metrics prints:
 python -m queuectl.cli config set max_retries 3
 python -m queuectl.cli config set backoff_base 2
 python -m queuectl.cli config set job_timeout 10
+
 #Simple immediate job
 python -m queuectl.cli enqueue --cmd "echo Hello World" --id job1
+
 #Failing job with custom retries
 python -m queuectl.cli enqueue --cmd "this_command_does_not_exist_999" --id fail1 --max-retries 2
 #Delayed job (run after 30 seconds)
