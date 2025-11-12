@@ -1,4 +1,4 @@
-# queuectl/worker.py
+
 
 import time
 import signal
@@ -16,27 +16,22 @@ _STOP_REQUESTED = False
 
 
 def _signal_handler(signum, frame):
-    # Just mark a flag; actual loop exit is graceful
     global _STOP_REQUESTED
     _STOP_REQUESTED = True
 
 
 def worker_main(worker_index: int) -> None:
-    """
-    Main loop for a single worker process.
-    """
+    
     global _STOP_REQUESTED
     _STOP_REQUESTED = False
 
     pid = multiprocessing.current_process().pid
     utils.register_worker_pid(pid)
 
-    # Set up signal handlers for graceful shutdown
     signal.signal(signal.SIGINT, _signal_handler)
     try:
         signal.signal(signal.SIGTERM, _signal_handler)
     except Exception:
-        # Not available on some platforms (e.g. Windows for certain signals)
         pass
 
     config = Config()
@@ -46,12 +41,10 @@ def worker_main(worker_index: int) -> None:
     try:
         while True:
             if _STOP_REQUESTED or utils.has_stop_flag():
-                # Finish current iteration and exit
                 break
 
             job = engine.acquire_job_for_worker()
             if not job:
-                # No job ready; small sleep
                 time.sleep(1.0)
                 continue
 
@@ -71,10 +64,7 @@ def worker_main(worker_index: int) -> None:
 
 
 def start_workers(count: int) -> None:
-    """
-    Start 'count' worker processes and keep the command running.
-    Ctrl+C will signal all workers to stop gracefully.
-    """
+    
     utils.ensure_data_dirs()
     procs = []
 
@@ -92,20 +82,16 @@ def start_workers(count: int) -> None:
     except KeyboardInterrupt:
         print("Received Ctrl+C, asking workers to stop...")
         utils.create_stop_flag()
-        # Wait for workers to finish
         for p in procs:
             p.join(timeout=30.0)
         utils.clear_stop_flag()
     else:
-        # Normal exit (e.g. all workers exit because stop flag was set)
         for p in procs:
             p.join(timeout=1.0)
 
 
 def stop_workers_command() -> None:
-    """
-    Command-style function: mark stop flag and wait until workers exit.
-    """
+    
     utils.ensure_data_dirs()
     pid_files_before = utils.list_worker_pid_files()
     if not pid_files_before:

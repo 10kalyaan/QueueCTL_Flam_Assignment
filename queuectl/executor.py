@@ -1,4 +1,3 @@
-# queuectl/executor.py
 
 import subprocess
 from typing import NamedTuple, Optional
@@ -15,10 +14,7 @@ class ExecutionResult(NamedTuple):
 
 
 def run_job(job: Job, timeout: int) -> ExecutionResult:
-    """
-    Run the job's shell command with a timeout.
-    Write stdout+stderr to a log file.
-    """
+    
     logs_dir = Path(utils.get_logs_dir())
     log_path = logs_dir / f"job-{job.id}.log"
 
@@ -49,7 +45,6 @@ def run_job(job: Job, timeout: int) -> ExecutionResult:
             error_message=error_message,
         )
     except subprocess.TimeoutExpired as e:
-        # Kill process & treat as failure
         msg = f"Command timed out after {timeout} seconds"
         log_path.write_text(msg, encoding="utf-8")
         return ExecutionResult(

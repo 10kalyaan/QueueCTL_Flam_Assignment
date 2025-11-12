@@ -1,4 +1,3 @@
-# queuectl/utils.py
 
 import os
 from pathlib import Path
@@ -6,7 +5,6 @@ from datetime import datetime
 import uuid
 from typing import List
 
-# Project root = parent of this file's directory
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT_DIR / "data"
 LOGS_DIR = DATA_DIR / "logs"
@@ -29,7 +27,6 @@ def get_logs_dir() -> str:
 
 
 def utc_now() -> datetime:
-    # Naive UTC; safe for lexicographic comparison as ISO strings
     return datetime.utcnow()
 
 

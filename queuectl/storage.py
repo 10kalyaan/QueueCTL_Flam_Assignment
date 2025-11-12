@@ -1,4 +1,4 @@
-# queuectl/storage.py
+
 
 import sqlite3
 from typing import List, Optional, Dict
@@ -9,9 +9,7 @@ from . import utils
 
 
 class JobStorage:
-    """
-    SQLite-backed storage for jobs.
-    """
+    
 
     def __init__(self, db_path: Optional[str] = None) -> None:
         utils.ensure_data_dirs()
@@ -154,11 +152,7 @@ class JobStorage:
             conn.close()
 
     def acquire_due_job(self, now_iso: str) -> Optional[Job]:
-        """
-        Atomically pick one due job (pending/failed, next_run_at <= now or NULL)
-        and mark it as processing. Uses a short write transaction so multiple
-        workers don't process the same job.
-        """
+        
         conn = self._get_connection()
         try:
             conn.execute("BEGIN IMMEDIATE;")

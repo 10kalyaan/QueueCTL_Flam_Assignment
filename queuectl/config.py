@@ -1,4 +1,3 @@
-# queuectl/config.py
 
 import json
 from typing import Any, Dict
@@ -6,14 +5,12 @@ from . import utils
 
 
 class Config:
-    """
-    Simple JSON-backed config with defaults.
-    """
+    
 
     DEFAULTS: Dict[str, Any] = {
         "max_retries": 3,
         "backoff_base": 2,
-        "job_timeout": 60,  # seconds
+        "job_timeout": 60, 
     }
 
     def __init__(self) -> None:
@@ -28,7 +25,6 @@ class Config:
                 stored = json.load(f)
             self._data.update(stored)
         except FileNotFoundError:
-            # First run – use defaults
             self._save()
 
     def _save(self) -> None:
